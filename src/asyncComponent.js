@@ -179,15 +179,6 @@ export default function asyncComponent(config) {
         })
     }
 
-    retryResolvingModule() {
-      // clear existing errors
-      this.registerErrorState(null)
-      sharedState.error = null
-      // clear resolver so it'll be retried
-      sharedState.resolver = null
-      this.resolveModule()
-    }
-
     componentWillUnmount() {
       this.unmounted = true
     }
@@ -198,7 +189,7 @@ export default function asyncComponent(config) {
       if (error) {
         return ErrorComponent ? (
           <ErrorComponent
-            retry={() => this.retryResolvingModule()}
+            retry={() => this.resolveModule()}
             {...this.props}
             error={error}
           />

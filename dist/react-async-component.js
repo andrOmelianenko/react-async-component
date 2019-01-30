@@ -356,16 +356,16 @@ function asyncComponent(config) {
           return result;
         });
       }
-    }, {
-      key: 'retryResolvingModule',
-      value: function retryResolvingModule() {
-        // clear existing errors
-        this.registerErrorState(null);
-        sharedState.error = null;
-        // clear resolver so it'll be retried
-        sharedState.resolver = null;
-        this.resolveModule();
-      }
+
+      // retryResolvingModule() {
+      //   // clear existing errors
+      //   this.registerErrorState(null)
+      //   sharedState.error = null
+      //   // clear resolver so it'll be retried
+      //   sharedState.resolver = null
+      //   this.resolveModule()
+      // }
+
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
@@ -383,7 +383,7 @@ function asyncComponent(config) {
         if (error) {
           return ErrorComponent ? React__default.createElement(ErrorComponent, _extends({
             retry: function retry() {
-              return _this4.retryResolvingModule();
+              return _this4.resolveModule();
             }
           }, this.props, {
             error: error
