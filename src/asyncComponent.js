@@ -183,13 +183,18 @@ export default function asyncComponent(config) {
       this.unmounted = true
     }
 
+    retry() {
+      this.setState({ resolver: null, error: null })
+      this.resolveModule()
+    }
+
     render() {
       const { module, error } = state
 
       if (error) {
         return ErrorComponent ? (
           <ErrorComponent
-            retry={() => this.resolveModule()}
+            retry={() => this.retry()}
             {...this.props}
             error={error}
           />
