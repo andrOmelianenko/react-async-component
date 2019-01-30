@@ -364,19 +364,14 @@ function asyncComponent(config) {
     }, {
       key: 'retry',
       value: function retry() {
-        var _this4 = this;
-
-        this.setState({
-          resolver: null,
-          error: null
-        }, function () {
-          _this4.resolveModule();
-        });
+        state.error = null;
+        state.resolver = null;
+        this.resolveModule();
       }
     }, {
       key: 'render',
       value: function render() {
-        var _this5 = this;
+        var _this4 = this;
 
         var module = state.module,
             error = state.error;
@@ -385,7 +380,7 @@ function asyncComponent(config) {
         if (error) {
           return ErrorComponent ? React__default.createElement(ErrorComponent, _extends({
             retry: function retry() {
-              return _this5.retry();
+              return _this4.retry();
             }
           }, this.props, {
             error: error

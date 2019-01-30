@@ -184,12 +184,9 @@ export default function asyncComponent(config) {
     }
 
     retry() {
-      this.setState({
-        resolver: null,
-        error: null,
-      }, () => {
-        this.resolveModule()
-      })
+      state.error = null
+      state.resolver = null
+      this.resolveModule()
     }
 
     render() {
