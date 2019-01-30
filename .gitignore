@@ -12,7 +12,9 @@ npm-debug.log
 coverage
 
 # Build output
-dist
+# dist
 
 # IDEs
 .vscode
+
+package-lock.json
