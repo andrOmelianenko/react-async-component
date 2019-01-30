@@ -85,6 +85,12 @@ const ErrorComponent = ({ error }) => <div>{error ? error.message : null}</div>
 const LoadingComponent = () => <div>Loading...</div>
 
 describe('integration tests', () => {
+  let consoleSpy
+
+  beforeEach(() => {
+    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => true)
+  })
+
   it('server rendering with client rehydration', () => {
     // we have to delete the window to emulate a server only environment
     let windowTemp = global.window
@@ -207,6 +213,9 @@ describe('integration tests', () => {
         <AsyncComponentProvider asyncContext={asyncContext}>
           <AsyncComponent />
         </AsyncComponentProvider>
+      )
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'Failed to resolve asyncComponent',
       )
       await asyncBootstrapper(app)
       expect(renderToStaticMarkup(app)).toContain('An error occurred')
